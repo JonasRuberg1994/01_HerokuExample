@@ -3,8 +3,8 @@ var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
-var url = 'mongodb://localhost:27017/store';
-
+//var url = 'mongodb://localhost:27017/store';
+var url = 'mongodb://clbokea:1234@ds053964.mlab.com:53964/store_2'
 // route to handle all users
 app.get('/users', function(req, res) {
 
