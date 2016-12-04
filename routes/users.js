@@ -81,7 +81,7 @@ app.post('/users', function(req, res) {
 
         collection.insert(req.body, function(err, data) {
             res.status(201);
-            res.location('/users' + data.insertedIds);
+            res.location('/users/' + data.insertedIds);
             res.send({ 'msg': 'user created' });
             db.close();
         });
