@@ -5,11 +5,11 @@ var ObjectId = require('mongodb').ObjectID;
 var url = require('../config/config.js').mongodb;
 
 // route to handle all users
-app.get('/users', function(req, res) {
+app.get('/testdata', function(req, res) {
 
     MongoClient.connect(url, function(err, db) {
 
-        var collection = db.collection('users');
+        var collection = db.collection('testdata');
 
         collection.find({}).toArray(function(err, data) {
 
@@ -21,7 +21,7 @@ app.get('/users', function(req, res) {
 
 
 // Rote to handle single user
-app.get('/users/:id', function(req, res) {
+app.get('/testdata/:id', function(req, res) {
 
     if (req.params.id.length === 12 || req.params.id.length === 24) {
         MongoClient.connect(url, function(err, db) {
@@ -33,7 +33,7 @@ app.get('/users/:id', function(req, res) {
                 return;
             }
 
-            var collection = db.collection('users');
+            var collection = db.collection('testdata');
 
             collection.findOne({ '_id': ObjectId(req.params.id) }, function(err, data) {
 
@@ -57,11 +57,11 @@ app.get('/users/:id', function(req, res) {
 
 // Route that handles creation of new user
 
-app.delete('/users', function(req, res) {
+app.delete('/testdata', function(req, res) {
 
     MongoClient.connect(url, function(err, db) {
 
-        var collection = db.collection('users');
+        var collection = db.collection('testdata');
 
         collection.remove(req.body, function(err, data) {
 
@@ -73,14 +73,14 @@ app.delete('/users', function(req, res) {
 
 // Route that handles creation of new user
 
-app.post('/users', function(req, res) {
+app.post('/testdata', function(req, res) {
     MongoClient.connect(url, function(err, db) {
 
-        var collection = db.collection('users');
+        var collection = db.collection('testdata');
 
         collection.insert(req.body, function(err, data) {
             res.status(201);
-            res.location('/users/' + data.insertedIds);
+            res.location('/testdata/' + data.insertedIds);
             res.send({ 'msg': 'user created' });
             db.close();
         });
@@ -89,10 +89,10 @@ app.post('/users', function(req, res) {
 
 // Route that handles updates of a user
 
-app.put('/users/:id', function(req, res) {
+app.put('/testdata/:id', function(req, res) {
     MongoClient.connect(url, function(err, db) {
 
-        var collection = db.collection('users');
+        var collection = db.collection('testdata');
 
         collection.update({ '_id': ObjectId(req.params.id) }, {
             $set: req.body
